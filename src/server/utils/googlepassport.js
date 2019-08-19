@@ -1,5 +1,5 @@
 const passport=require('passport');
-const User=require('../db/models/userschema');
+const User=require('../models/userschema');
 const GoogleStrategy=require('passport-google-oauth2');
 //runs when to write data in cookie
 passport.serializeUser((user,done)=>{
