@@ -6,7 +6,7 @@ export default function Paper() {
     <div>
       <Container >
         <Row>
-          <Col sm="6" md="4">
+          <Col xs={{ size: 8, offset: 2 }} md={{ size: 3 ,offset: 0}} >
             <PaperCard />
           </Col>
           <Col sm="6" md="4">
