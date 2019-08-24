@@ -2,15 +2,15 @@ const mongoose=require('../db/connection');
 var Schema=mongoose.Schema;
 var paperSchema=new Schema({
     'subject' : { 
-        type : String
+        type : String,required:true
     },
     'url' : { 
-        type : String
+        type : String,required:true
     },
     'sem' : { 
-        type : Number
+        type : Number,required:true
     },
-    'branch' : { type : String
+    'branch' : { type : String,required:true
     },
 });
 var Paper=mongoose.model('paper',paperSchema);

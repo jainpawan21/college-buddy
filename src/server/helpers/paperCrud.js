@@ -8,7 +8,7 @@ const paperOperation={
             res.json({status:'F',error:err});
         }
         else{
-            console.log("Paper uploaded sucessfully ",doc);
+            console.log("Paper details uploaded sucessfully ",doc);
             res.json({doc:doc});
         }
     })
