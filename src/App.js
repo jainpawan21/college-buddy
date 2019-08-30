@@ -1,11 +1,12 @@
 import React from 'react';
 import NavBar from './client/components/NavBar';
 import {Route, Switch} from "react-router-dom";
-import PaperTabs from './client/pages/PaperTabs';
+import Paper from './client/pages/Paper';
 import NewsList from './client/pages/NewsList';
 import Loader from './client/components/Loader';
 import TimeTable from './client/pages/TimeTable';
 import ErrorPage from './client/pages/ErrorPage/ErrorPage';
+import './App.css'
 function App() {
   return (
     <>
@@ -23,7 +24,7 @@ function App() {
               exac
               render={() =>
                   <div>
-                      <PaperTabs />                    
+                      <Paper/>                    
                   </div>
               }
           />

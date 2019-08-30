@@ -18,7 +18,7 @@ class Header extends Component{
       return(
           <React.Fragment>
               
-              <Navbar className="navbar-light" style={{backgroundColor: "#ffffff"}} expand="sm">
+              <Navbar className="navbar-light shadow" sticky={'top'} style={{backgroundColor: "#ffffff"}} expand="sm">
               <div className="container">
                   
                   <NavbarBrand className="mr-auto" href="/">
@@ -28,24 +28,29 @@ class Header extends Component{
                   <Collapse isOpen={this.state.isNavOpen} navbar>
                        <Nav className="ml-auto" navbar>
 
-                           <NavItem>
-                               <NavLink className="nav-link" to="/">
-                                   <span className="fa fa-home fa-lg"></span> Home
+                           <NavItem className="ml-auto mr-auto">
+                               <NavLink className="nav-link" to="/hello">
+                                   Home
                                </NavLink>
                            </NavItem>
-                           <NavItem>
+                           <NavItem className="ml-auto mr-auto">
                                <NavLink className="nav-link" to="/papers">
-                                   <span className="fa fa-info fa-lg"></span> Papers
+                                 Papers
                                </NavLink>
                            </NavItem>
-                           <NavItem>
+                           <NavItem className="ml-auto mr-auto">
+                               <NavLink className="nav-link" to="/notes">
+                                  Notes
+                               </NavLink>
+                           </NavItem>
+                           <NavItem className="ml-auto mr-auto">
                                <NavLink className="nav-link" to="/timetable">
-                                   <span className="fa fa-list fa-lg"></span> TImeTable
+                                  TImeTable
                                </NavLink>
                            </NavItem>
-                           <NavItem>
+                           <NavItem className="ml-auto mr-auto">
                                <NavLink className="nav-link" to="/discussion">
-                                   <span className="fa fa-address-card fa-lg"></span> Discussion
+                                Discussion
                                </NavLink>
                            </NavItem>
                            
