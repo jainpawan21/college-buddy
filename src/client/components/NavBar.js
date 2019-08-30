@@ -29,7 +29,7 @@ class Header extends Component{
                        <Nav className="ml-auto" navbar>
 
                            <NavItem className="ml-auto mr-auto">
-                               <NavLink className="nav-link" to="/hello">
+                               <NavLink className="nav-link" to="/">
                                    Home
                                </NavLink>
                            </NavItem>

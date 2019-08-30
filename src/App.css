@@ -39,11 +39,12 @@ body {
 }
 
 
-.active{
+/* .active{
   background-image: linear-gradient(to right, rgba(126, 213, 111, 0.8), rgba(2, 179, 228, 0.8));  
   color: black;
  
-}
+} */
+
 
 .cardBorder{
   border: 50px;
@@ -130,10 +131,23 @@ body {
 
   .story-button:active{
     border: none;
-    box-shadow: 0 0px 10px rgba(225, 255, 255, 0.5);
+    box-shadow: 0px 0px 10px rgba(225, 255, 255, 0.5);
   }
   @media only screen and (max-width: 37.5em) {
     .story-button{
       transform: skewX(0deg);
     }
   }
+
+
+.timetable-status{
+  margin-top: 20px;
+  width: 100%;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.3);
+}
+
+.papersem-card-border{
+  border: rgba(2, 179, 228, 0.8);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
