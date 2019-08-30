@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Container,Row,Col, Button, Form, Label, Input, Modal, ModalHeader, ModalBody} from 'reactstrap';
+import {Container,Row,Col, Button, Form, Label, Input, Modal, ModalHeader, ModalBody, Card, CardBody, CardTitle, CardText} from 'reactstrap';
 import axios from './../constants/axios'
 class TimeTable extends Component{
 
@@ -36,7 +36,7 @@ class TimeTable extends Component{
       this.setState({
         data: res.data.doc
       })
-      this.toggle()
+      // this.toggle()
     })
     .catch((err) => this.setState({
       error: err.response
@@ -54,7 +54,9 @@ class TimeTable extends Component{
       [e.target.name]: e.target.value
     })
   }
-
+  componentDidMount(){
+    console.log(this.state.data)
+  }
   render() {
   return (
     <div>
@@ -118,7 +120,7 @@ class TimeTable extends Component{
         <Button color="info" onClick={(e) => this.handleSubmit(e)}>Submit</Button>
         </div>
       </Form>
-
+{/* 
       {this.state.data && <Modal isOpen={this.state.modal} toggle={this.toggle} >
           <ModalHeader toggle={this.toggle}>{this.state.time}</ModalHeader>
           <ModalBody>
@@ -127,7 +129,24 @@ class TimeTable extends Component{
             Teacher :- {this.state.data.teacher} 
           </ModalBody>
          
-        </Modal> }
+        </Modal> } */}
+         <Row className="mt-3">
+         {this.state.data.length !== 0 ?
+            <Col>
+              <Card className="shadow">
+                <CardBody>
+                  <CardTitle>{this.state.time}</CardTitle>
+                  <CardText>{this.state.data[0].subject}</CardText>
+                  <CardText>{this.state.data[0].room}</CardText>
+                  <CardText>{this.state.data[0].teacher}</CardText>
+                </CardBody>
+              </Card>
+            </Col>: 
+            <div>
+
+            </div>
+          }
+        </Row>
       </Container>
 
     </div>

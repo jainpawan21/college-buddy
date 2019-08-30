@@ -19,7 +19,6 @@ class NewsList extends Component {
     .then((res) => {
       this.setState({
         newsData: res.data.news,
-        error: res.data.news[0].heading
       })
     })
     
@@ -32,7 +31,7 @@ class NewsList extends Component {
     <div>
       {this.state.newsData.map((news) => {
         return(
-          <Row key={news._id} className = "row mt-3 mb-3">
+          <Row key={news._id} className = "mt-5 ">
             <div className="story">
               <figure className="story__shape">
                   <img src={require('./../constants/photo.jpeg')} alt="Person on a tour" className="story__img" />
@@ -43,9 +42,11 @@ class NewsList extends Component {
                       {news.news} 
                   </p>
               </div>
-              <div style={{textAlign: 'center'}} >
-                <Button className="story-button">See More</Button>
-              </div> 
+              {news.url && <div style={{textAlign: 'center'}} >
+                <a href={news.url} target="_blank">
+                <Button className="story-button" >See More</Button>
+                </a>
+              </div> }
             </div>  
           </Row>
         )

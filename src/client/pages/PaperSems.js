@@ -6,23 +6,32 @@ class PaperSems extends Component{
   state = {
     data: [],
     sem: '',
-    branch: '',
-
+    branch: this.props.match.params.branch,
+    error : ''
   }
 
-  handleSubmit = (e) => {
-    this.setState({
+  handleChange = async (e) => {
+    await this.setState({
       sem: e.target.value,
-      branch: this.props.match.params.branch
     })
+    this.handleSubmit()
+  }
+  handleSubmit = () => {
     axios.post('display',{
       branch: this.state.branch,
       sem: this.state.sem
     })
     .then((res) => {
+      console.log(res)
       this.setState({
-        data : res.data.papers
+        data : res.data.papers,
+        error : ''
       })
+      if(res.data.papers.length === 0){
+        this.setState({
+          error: 'Not Found'
+        })
+      }
     })
     .catch((err) => console.log(err.response)) 
   }
@@ -34,7 +43,7 @@ class PaperSems extends Component{
         <Row className="form-group">  
           <Label for="sem" xs={4} md={2}>Semester</Label>
           <Col xs={8}>
-          <Input type="select" name="sem" id="sem" onChange={(e) => this.handleSubmit(e)}>
+          <Input type="select" name="sem" id="sem" onChange={(e) => this.handleChange(e)}>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -52,7 +61,7 @@ class PaperSems extends Component{
         <Row>
         {this.state.data.map((paper => {
           return (
-            <Col xs="6" sm="4" className="p-4">
+            <Col xs="12" sm="4" className="p-4" key={paper._id}>
               <Card className="shadow" style={{borderRadius: '10px'}}>
                 <CardImg top src={require('../constants/papers-cse.jpg')}></CardImg>
                 <CardBody className="justify-center">
@@ -63,7 +72,9 @@ class PaperSems extends Component{
                     Branch : {paper.branch}
                     <br/>
                     <div style={{textAlign: 'center'}} >
-                      <Button className="bg-info p-1" href={paper.url}>View in Drive</Button>
+                      <a href={paper.url} target="_blank">
+                      <Button className="bg-info p-1" >View in Drive</Button>
+                      </a>
                     </div>  
                   </CardText>
                   
@@ -73,6 +84,12 @@ class PaperSems extends Component{
           )
         }))
       }
+      </Row>
+      <Row>
+        {this.state.error && 
+        <div className="offset-3 col-6" style={{textAlign: 'center'}}>
+          <h4>{this.state.error}</h4>
+        </div>}
       </Row>
       </Container>
       }
