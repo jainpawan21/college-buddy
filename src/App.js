@@ -1,5 +1,6 @@
 import React from 'react';
 import NavBar from './client/components/NavBar';
+import Footer from './client/components/Footer';
 import {Route, Switch} from "react-router-dom";
 import Paper from './client/pages/Paper';
 import Notes from './client/pages/Notes';
@@ -9,7 +10,7 @@ import TimeTable from './client/pages/TimeTable';
 import ErrorPage from './client/pages/ErrorPage/ErrorPage';
 import PaperSems from './client/pages/PaperSems';
 import FinalPaper from './client/pages/FinalPaper';
-import News from './client/pages/News';
+
 import './App.css'
 function App() {
   return (
@@ -70,7 +71,9 @@ function App() {
               path="/discussion"
               render={(props) =>
                   <div>
-                      <Loader {...props}/>
+                      <div style={{width: '100%', textAlign: 'center'}}>Coming Soon</div>
+                      <Loader {...props} />
+                      
                   </div>
               }
           /> 
@@ -84,6 +87,7 @@ function App() {
               }
           /> 
         </Switch>
+      <Footer />
     </>
   );
 }

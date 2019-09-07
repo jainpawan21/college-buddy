@@ -22,34 +22,34 @@ class Header extends Component{
               <div className="container">
                   
                   <NavbarBrand className="mr-auto" href="/">
-                     College Buddy
+                     IndianTechRishu
                   </NavbarBrand>
-                  <NavbarToggler onClick={this.toggleNav} className="mr-2" />
+                  <NavbarToggler onClick={this.toggleNav} className="mr-2" style={{outline: 'none'}}/>
                   <Collapse isOpen={this.state.isNavOpen} navbar>
                        <Nav className="ml-auto" navbar>
 
-                           <NavItem className="ml-auto mr-auto">
+                           <NavItem className="ml-auto mr-auto" onClick={this.toggleNav}>
                                <NavLink className="nav-link" to="/">
                                    Home
                                </NavLink>
                            </NavItem>
-                           <NavItem className="ml-auto mr-auto">
+                           <NavItem className="ml-auto mr-auto" onClick={this.toggleNav}>
                                <NavLink className="nav-link" to="/papers">
                                  Papers
                                </NavLink>
                            </NavItem>
                            <NavItem className="ml-auto mr-auto">
-                               <NavLink className="nav-link" to="/notes">
+                               <NavLink className="nav-link" to="/notes" onClick={this.toggleNav}>
                                   Notes
                                </NavLink>
                            </NavItem>
                            <NavItem className="ml-auto mr-auto">
-                               <NavLink className="nav-link" to="/timetable">
+                               <NavLink className="nav-link" to="/timetable" onClick={this.toggleNav}>
                                   TImeTable
                                </NavLink>
                            </NavItem>
                            <NavItem className="ml-auto mr-auto">
-                               <NavLink className="nav-link" to="/discussion">
+                               <NavLink className="nav-link" to="/discussion" onClick={this.toggleNav}>
                                 Discussion
                                </NavLink>
                            </NavItem>

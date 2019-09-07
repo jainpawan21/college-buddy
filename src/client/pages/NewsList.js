@@ -2,9 +2,7 @@
 import React, {Component} from 'react'
 import {Row,Button} from 'reactstrap';
 import axios from '../constants/axios'
-
-
-
+import Loader from '../components/Loader'
 class NewsList extends Component {
   constructor(props){
     super(props)
@@ -27,14 +25,26 @@ class NewsList extends Component {
 
 
   render() {
+    if(this.state.newsData.length === 0){
+      return (
+        <div>
+          <Loader />
+        </div>
+      )
+    }
+    else {
+
+    
   return (
-    <div>
+    <div style={{overflowX: 'hidden'}}>
+      
       {this.state.newsData.map((news) => {
         return(
-          <Row key={news._id} className = "mt-5 ">
-            <div className="story">
+          <Row key={news._id} className = "mt-4" style={{display: 'flex', justifyContent: 'center'}}>
+            <div className="story mb-5" style={{alignSelf: 'center'}}>
               <figure className="story__shape">
-                  <img src={require('./../constants/photo.jpeg')} alt="Person on a tour" className="story__img" />
+                  {news.image ?  <img src={news.image} alt={news.heading} className="story__img" /> :
+                  <img src={require('./../constants/photo.jpeg')} alt={news.heading} className="story__img" />}
                   <figcaption className="story__caption">{news.heading}</figcaption>
               </figure>
               <div className="story__text">
@@ -43,7 +53,7 @@ class NewsList extends Component {
                   </p>
               </div>
               {news.url && <div style={{textAlign: 'center'}} >
-                <a href={news.url} target="_blank">
+                <a href={news.url} target="_blank" rel="noopener noreferrer">
                 <Button className="story-button" >See More</Button>
                 </a>
               </div> }
@@ -54,7 +64,7 @@ class NewsList extends Component {
     </div>
    
   )
-  }
+  }}
 }
 
 export default NewsList

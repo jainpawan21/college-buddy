@@ -1,9 +1,10 @@
 import React from 'react'
 import { Container, Row, Col, Card, CardBody,CardImg } from 'reactstrap';
+import Footer from '../components/Footer'
 import { Link } from 'react-router-dom'
 export default function Paper({match}) {
   return (
-    <div>
+    <div style={{overflow: 'auto'}}>
       <Container >
         <Row>
         
@@ -45,7 +46,7 @@ export default function Paper({match}) {
           </Link>
         </Col>
         <Link to="/papers/BT">
-        <Col sm="4" className="p-4">
+        <Col sm="4" className="p-4 mb-5">
           <Card className="shadow" style={{borderRadius: '10px'}}>
             <CardImg top src={require('../constants/papers-bt.jpg')}></CardImg>
             <CardBody className = "justify-center">
@@ -58,9 +59,10 @@ export default function Paper({match}) {
         </Col>
         </Link>
         </Row>
+        
       </Container>
  
-      
+      <Footer /> 
     </div>
   )
 }

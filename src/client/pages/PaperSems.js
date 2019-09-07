@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Container, Row, Col, Label, Input, Card, CardBody,CardImg, CardImgOverlay, CardText, Button} from 'reactstrap';
+import { Container, Row, Col, Label, Input, Card, CardBody, CardText, Button} from 'reactstrap';
 import axios from './../constants/axios'
 class PaperSems extends Component{
 
@@ -44,6 +44,7 @@ class PaperSems extends Component{
           <Label for="sem" xs={4} md={2}>Semester</Label>
           <Col xs={8}>
           <Input type="select" name="sem" id="sem" onChange={(e) => this.handleChange(e)}>
+            <option value="" hidden>Select</option>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -61,26 +62,22 @@ class PaperSems extends Component{
         <Row>
         {this.state.data.map((paper => {
           return (
-            <Col xs="12" sm="4" className="p-4" key={paper._id}>
+            <Col xs="12" sm="6" className="p-4" key={paper._id}>
               <Card className="shadow" style={{borderRadius: '10px'}}>
-                <CardImg top src={require('../constants/papers-cse.jpg')}></CardImg>
+              <iframe src={paper.url} height="450" title={paper.subject}></iframe>
                 <CardBody className="justify-center">
                   <CardText>Subject : {paper.subject} 
                     <br/>
                     Sem : {paper.sem}
                     <br/>
                     Branch : {paper.branch}
-                    <br/>
-                    <div style={{textAlign: 'center'}} >
-                      <a href={paper.url} target="_blank">
-                      <Button className="bg-info p-1" >View in Drive</Button>
-                      </a>
-                    </div>  
+                    
                   </CardText>
                   
                 </CardBody>
               </Card>
             </Col>
+           
           )
         }))
       }

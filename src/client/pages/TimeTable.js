@@ -5,23 +5,37 @@ class TimeTable extends Component{
 
   state = {
     data: [],
-    modal: false,
+    dataStatus: false,
     branch: '',
     sem: 0,
     time: '',
-    sec: 'B',
-    day: 'MON',
+    sec: '',
+    day: '',
     error: ''
   }
-  // setday(){
-  //   var date = new Date()
-  //   var day = date.getDay();
-  //   switch(day){
-  //     case 0 : this.setState({
-  //       day: 'MON'
-  //     })
-  //   }
-  // }
+  setday(){
+    var date = new Date()
+    var day = date.getDay();
+    let dayName = '';
+    switch(day){
+     
+      case 1 : dayName = 'MON';
+                break;
+      case 2 : dayName = 'TUE';
+                break;
+      case 3 : dayName = 'WED';
+                break;
+      case 4 : dayName = 'THU';
+                break;
+      case 5 : dayName = 'FRI';
+                break;
+      default : dayName = '';
+
+    }
+    this.setState({
+      day: dayName
+    })
+  }
   handleSubmit = (e) => {
     e.preventDefault();
     axios.post('search', {
@@ -34,7 +48,8 @@ class TimeTable extends Component{
     .then((res)=> {
       console.log(res.data.doc)
       this.setState({
-        data: res.data.doc
+        data: res.data.doc,
+        dataStatus: true
       })
       // this.toggle()
     })
@@ -43,19 +58,14 @@ class TimeTable extends Component{
     }))
   }
 
-  toggle = () => {
-    this.setState({
-      modal: !this.state.modal
-    })
-  }
-
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     })
   }
-  componentDidMount(){
+  componentWillMount(){
     console.log(this.state.data)
+    this.setday()
   }
   render() {
   return (
@@ -63,10 +73,25 @@ class TimeTable extends Component{
       <Container>
       
       <Form>
+      <Row className="form-group">  
+          <Label for="day" xs={4} md={2}>Day</Label>
+          <Col xs={8}>
+          <Input type="select" name="day" id="day" value={this.state.day} onChange={(e) => this.handleChange(e) }>
+            <option value="" hidden>Select</option>
+            <option value="MON">MONDAY</option>
+            <option value="TUE">TUESDAY</option>
+            <option value="WED">WEDNESDAY</option>
+            <option value="THU">THURSDAY</option>
+            <option value="FRI">FRIDAY</option>
+           
+          </Input>
+          </Col>
+        </Row>
         <Row className="form-group">
           <Label for="branch" xs={4} md={2}>Branch</Label>
           <Col xs={8}>
           <Input type="select" name="branch" id="branch" onChange={(e) => this.handleChange(e)}>
+            <option value="" hidden>Select</option>
             <option>CSE</option>
             <option>ECE</option>
             <option>BT</option>
@@ -80,6 +105,7 @@ class TimeTable extends Component{
           <Label for="sem" xs={4} md={2}>Semester</Label>
           <Col xs={8}>
           <Input type="select" name="sem" id="sem" onChange={(e) => this.handleChange(e)}>
+            <option value="" hidden>Select</option>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -96,6 +122,7 @@ class TimeTable extends Component{
           <Label for="time" xs={4} md={2}>Time</Label>
           <Col xs={8}>
           <Input type="select" name="time" id="time" onChange={(e) => this.handleChange(e) }>
+            <option value="" hidden>Select</option>
             <option>09:00-09:55</option>
             <option>09:55-10:50</option>
             <option>10:50-11:45</option>
@@ -110,7 +137,8 @@ class TimeTable extends Component{
         <Row className="form-group">  
           <Label for="section" xs={4} md={2}>Section</Label>
           <Col xs={8}>
-          <Input type="select" name="section" id="section" onChange={(e) => this.handleChange(e) }>
+          <Input type="select" name="sec" id="sec" onChange={(e) => this.handleChange(e) }>
+            <option value="" hidden>Select</option>
             <option>A</option>
             <option>B</option>
           </Input>
@@ -120,20 +148,10 @@ class TimeTable extends Component{
         <Button color="info" onClick={(e) => this.handleSubmit(e)}>Submit</Button>
         </div>
       </Form>
-{/* 
-      {this.state.data && <Modal isOpen={this.state.modal} toggle={this.toggle} >
-          <ModalHeader toggle={this.toggle}>{this.state.time}</ModalHeader>
-          <ModalBody>
-            Subject :- {typeof(this.state.data.subject)}
-            Room No :- {this.state.data.room}
-            Teacher :- {this.state.data.teacher} 
-          </ModalBody>
-         
-        </Modal> } */}
-         <Row className="mt-3">
-         {this.state.data.length !== 0 ?
+        <Row className="mt-3">
+         {this.state.data.length !== 0 && this.state.dataStatus ?
             <Col>
-              <Card className="shadow">
+              <Card className="timetable-status" style={{backgroundColor: '#C2F3ED'}}>
                 <CardBody>
                   <CardTitle>{this.state.time}</CardTitle>
                   <CardText>{this.state.data[0].subject}</CardText>
@@ -141,7 +159,14 @@ class TimeTable extends Component{
                   <CardText>{this.state.data[0].teacher}</CardText>
                 </CardBody>
               </Card>
-            </Col>: 
+            </Col> : this.state.dataStatus === true ?  
+            <Col>
+              <Card className="timetable-status" style={{backgroundColor: '#C2F3ED'}}>
+                <CardBody>
+                  <CardText style={{textAlign : 'center'}}>Not Found Choose Any Other</CardText>
+                </CardBody>
+              </Card>
+            </Col> : 
             <div>
 
             </div>
